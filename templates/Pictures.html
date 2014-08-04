@@ -1,0 +1,15 @@
+{% extends "Maintemplate.html" %}
+
+{% block title %}
+    Pictures
+{% endblock %}
+
+{% block content %}
+    {% for picture in pictures %}
+        {{ picture.title }}
+        <br>
+        <img src= {{ picture.url }} alt=  {{ picture }} width = 640 height = 480>
+        <br>
+        {{ picture.description }}
+    {% endfor %}
+{% endblock %}
