@@ -1,1 +1,3 @@
 web: gunicorn hello:app --log-file=-
+worker: python RockTribe.py
+web: gunicorn hello:app --preload

@@ -19,7 +19,7 @@ class Picture(db.Model):
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String, index=True, unique=True)
-    description = db.Column(db.String, index=True, unique=True)
+    description = db.Column(db.String, index=True)
     title = db.Column(db.String, unique=True)
 
     def __init__(self, title, url, description):

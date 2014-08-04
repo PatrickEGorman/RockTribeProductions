@@ -8,8 +8,10 @@
     {% for picture in pictures %}
         {{ picture.title }}
         <br>
-        <img src= {{ picture.url }} alt=  {{ picture }} width = 640 height = 480>
+        <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
         <br>
         {{ picture.description }}
+        <br>
+        <br>
     {% endfor %}
 {% endblock %}

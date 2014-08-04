@@ -17,6 +17,9 @@ def home():
 @app.route('/pictures')
 def pictures():
     images = Models.Picture.query.all()
+    for image in images:
+        if "facebook" in image.url:
+            images.remove(image)
     return render_template("pictures.html", pictures=images)
 
 
