@@ -1,4 +1,4 @@
-from RockTribe import db
+from views import db
 
 
 class Picture(db.Model):
