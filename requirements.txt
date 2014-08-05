@@ -2,7 +2,6 @@ Cython==0.20.1
 Flask==0.10.1
 Jinja2==2.7.2
 MarkupSafe==0.18
-PIL==1.1.7
 PasteDeploy==1.5.2
 PyAudio==0.2.7
 PyYAML==3.11
