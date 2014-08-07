@@ -1,3 +1,1 @@
-web: gunicorn views:app --log-file=-
-worker: python views.py
-web: gunicorn views:app --preload
+web: gunicorn RockTribe:app --log-file=-
