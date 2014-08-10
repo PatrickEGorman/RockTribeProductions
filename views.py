@@ -6,7 +6,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 db = SQLAlchemy(app)
 
-import models
 
 @app.route('/')
 @app.route('/home')
@@ -16,6 +15,7 @@ def home():
 
 @app.route('/pictures')
 def pictures():
+    import models
     images = models.Picture.query.all()
     for image in images:
         if "facebook" in image.url:
@@ -25,6 +25,7 @@ def pictures():
 
 @app.route('/videos')
 def videos():
+    import models
     videoclips = models.Video.query.all()
     for video in videoclips:
         if "http://" not in video.url:
