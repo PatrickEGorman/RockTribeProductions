@@ -1,10 +1,13 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+import os
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
 db = SQLAlchemy(app)
+app.debug = True
+db.create_all()
 
 
 @app.route('/')
@@ -45,4 +48,4 @@ def contact():
     return render_template("Contact.html")
 
 if __name__ == '__main__':
-    app.run(PROPOGATE_EXCEPTIONS=True)
+    app.run()
