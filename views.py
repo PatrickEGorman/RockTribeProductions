@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template("home.html")
+    return render_template("Home.html")
 
 
 @app.route('/pictures')
@@ -20,7 +20,7 @@ def pictures():
     for image in images:
         if "facebook" in image.url:
             images.remove(image)
-    return render_template("pictures.html", pictures=images)
+    return render_template("Pictures.html", pictures=images)
 
 
 @app.route('/videos')
@@ -32,17 +32,17 @@ def videos():
             video.url = "http://"+video.url
         if "<br>" in video.description:
             video.description = video.description.replace("<br>", "")
-    return render_template("videos.html", videos=videoclips)
+    return render_template("Videos.html", videos=videoclips)
 
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template("About.html")
 
 
 @app.route('/contact')
 def contact():
-    return render_template("contact.html")
+    return render_template("Contact.html")
 
 if __name__ == '__main__':
     app.run(PROPOGATE_EXCEPTIONS=True)
