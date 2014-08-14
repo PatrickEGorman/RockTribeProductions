@@ -1,7 +1,8 @@
 from views import db
 from models import Picture, Video
 
-class Create_database():
+
+class DbInit():
 
     def __init__(self):
         db.drop_all()
