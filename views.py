@@ -4,7 +4,7 @@ import os
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
+app.config.from_pyfile("config.py")
 db = SQLAlchemy(app)
 app.debug = True
 
@@ -17,7 +17,6 @@ def home():
 
 @app.route('/pictures')
 def pictures():
-    import models
     images = models.Picture.query.all()
     for image in images:
         if "facebook" in image.url:
@@ -27,7 +26,6 @@ def pictures():
 
 @app.route('/videos')
 def videos():
-    import models
     videoclips = models.Video.query.all()
     for video in videoclips:
         if "http://" not in video.url:
@@ -47,4 +45,7 @@ def contact():
     return render_template("Contact.html")
 
 if __name__ == '__main__':
+    import models
+    import init_db
+    init_db.Create_database()
     app.run()
