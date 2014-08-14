@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.config.from_pyfile("config.py")
 db = SQLAlchemy(app)
 
+import models
 
 
 @app.route('/')
@@ -36,7 +37,6 @@ def contact():
     return render_template("Contact.html")
 
 if __name__ == '__main__':
-    import models
     import init_db
     init_db.DbInit()
     app.run()
