@@ -1,12 +1,16 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
+import psycopg2
 
 
 app = Flask(__name__)
 app.config.from_pyfile("config.py")
 db = SQLAlchemy(app)
 
-import models
+
+import database
+
+database.DbInit()
 
 
 @app.route('/')
@@ -17,14 +21,14 @@ def home():
 
 @app.route('/pictures')
 def pictures():
-    images = models.Picture.query.all()
+    picture_query = database.Query()
+    images = picture_query.querypictures()
     return render_template("Pictures.html", pictures=images)
 
 
 @app.route('/videos')
 def videos():
-    videoclips = models.Video.query.all()
-    return render_template("Videos.html", videos=videoclips)
+    return render_template("Videos.html")
 
 
 @app.route('/about')
@@ -37,6 +41,5 @@ def contact():
     return render_template("Contact.html")
 
 if __name__ == '__main__':
-    import init_db
-    init_db.DbInit()
+
     app.run()
