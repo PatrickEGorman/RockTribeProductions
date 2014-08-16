@@ -1,16 +1,11 @@
 from flask import Flask, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
-import psycopg2
 
 
 app = Flask(__name__)
 app.config.from_pyfile("config.py")
-db = SQLAlchemy(app)
-
-
-import database
-
-database.DbInit()
+db = SQLAlchemy()
+db.init_app(app)
 
 
 @app.route('/')

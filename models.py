@@ -1,7 +1,9 @@
 from views import db
-
+import config
 
 class Picture(db.Model):
+    __tablename__ = "picture"
+
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String, index=True, unique=True)
     description = db.Column(db.String, index=True, unique=True)
@@ -17,6 +19,8 @@ class Picture(db.Model):
 
 
 class Video(db.Model):
+    __tablename__ = "video"
+
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String, index=True, unique=True)
     description = db.Column(db.String, index=True)
