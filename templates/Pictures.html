@@ -6,11 +6,11 @@
 
 {% block content %}
     {% for picture in pictures %}
-        {{ picture[1] }}
+        {{ picture.title }}
         <br>
-        <img src= {{ picture[2] }} alt=  {{ picture }} style ="width:50%;height:50%">
+        <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
         <br>
-        {{ picture[3] }}
+        {{ picture.description }}
         <br>
         <br>
     {% endfor %}
