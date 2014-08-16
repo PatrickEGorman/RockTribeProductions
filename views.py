@@ -6,6 +6,8 @@ app = Flask(__name__)
 app.config.from_pyfile("config.py")
 db = SQLAlchemy(app)
 
+import models
+
 
 @app.route('/')
 @app.route('/home')
@@ -15,14 +17,14 @@ def home():
 
 @app.route('/pictures')
 def pictures():
-    picture_query = database.Query()
-    images = picture_query.querypictures()
+    images = models.Picture.query.all()
     return render_template("Pictures.html", pictures=images)
 
 
 @app.route('/videos')
 def videos():
-    return render_template("Videos.html")
+    video_clips = models.Video.query.all()
+    return render_template("Videos.html", videos=video_clips)
 
 
 @app.route('/about')
