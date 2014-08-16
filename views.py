@@ -4,8 +4,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_pyfile("config.py")
-db = SQLAlchemy()
-db.init_app(app)
+db = SQLAlchemy(app)
 
 
 @app.route('/')
