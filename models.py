@@ -1,12 +1,11 @@
 from views import db
-import config
 
 class Picture(db.Model):
     __tablename__ = "picture"
 
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String, index=True, unique=True)
-    description = db.Column(db.String, index=True, unique=True)
+    description = db.Column(db.String)
     title = db.Column(db.String, unique=True)
 
     def __init__(self, title, url, description):

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    {% for picture in pictures %}
+    {% for picture in pictures|sort(atribute='id') %}
         {{ picture.title }}
         <br>
         <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
