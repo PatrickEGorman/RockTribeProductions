@@ -17,7 +17,7 @@ def home():
 
 @app.route('/pictures')
 def pictures():
-    images = models.Picture.query.all()
+    images = reversed(models.Picture.query.all())
     return render_template("Pictures.html", pictures=images)
 
 
@@ -36,6 +36,11 @@ def about():
 def contact():
     return render_template("Contact.html")
 
+@app.route('/picture<pictureid>')
+def enlarge(pictureid):
+    pictures = models.Picture.query.all()
+    picture = pictures[int(pictureid)-1]
+    return render_template("zoompicture.html", picture=picture)
 
 
 if __name__ == '__main__':

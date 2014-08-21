@@ -1,0 +1,11 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+
+    {{ picture.title }}
+
+{% endblock %}
+
+{% block content %}
+    <img src={{ picture.url }} alt= {{ picture }} style ="width:100%;height:100%"}>
+{% endblock %}

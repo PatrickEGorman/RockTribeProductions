@@ -4,36 +4,29 @@
     Pictures
 {% endblock %}
 
-
 {% block head %}
+
     <style>
-        ul.enlarge{
+        ul.pictures{
             list-style-type: none;
         }
-        ul.enlarge span{
-            position:absolute;
-            left:-9999px;
-        }
-        ul.enlarge li:active span{
-            left:150px;
-            text-align: center;
-        }
     </style>
+
 {% endblock %}
 
+
 {% block content %}
-    <ul class = enlarge>
+    <ul class = pictures>
     {% for picture in pictures %}
         <a>
         <li>
             {{ picture.title }}
             <br>
-                 <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
-                 <span>
-                    <img src= {{ picture.url }} alt= {{ picture }} style = "width:75%;height:75%;">
-                    <br/>
+                <a href = {{ "picture"~picture.id }}>
+                <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
+                </a>
+                <br>
                     {{ picture.description }}
-                 </span>
             <br>
             <br>
             <br>
