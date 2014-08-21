@@ -38,8 +38,7 @@ def contact():
 
 @app.route('/picture<pictureid>')
 def enlarge(pictureid):
-    pictures = models.Picture.query.all()
-    picture = pictures[int(pictureid)-1]
+    picture = models.Picture.query.get(pictureid)
     return render_template("zoompicture.html", picture=picture)
 
 
