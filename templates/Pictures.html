@@ -5,20 +5,41 @@
 {% endblock %}
 
 
+{% block head %}
+    <style>
+        ul.enlarge{
+            list-style-type: none;
+        }
+        ul.enlarge span{
+            position:absolute;
+            left:-9999px;
+        }
+        ul.enlarge li:active span{
+            left:150px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-
+    <ul class = enlarge>
     {% for picture in pictures %}
-
+        <a>
+        <li>
             {{ picture.title }}
             <br>
-                <a href = {{ picture.url }}>
-                    <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
-                </a>
+                 <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
+                 <span>
+                    <img src= {{ picture.url }} alt= {{ picture }} style = "width:75%;height:75%;">
+                    <br/>
+                    {{ picture.description }}
+                 </span>
             <br>
-            {{ picture.description }}
             <br>
             <br>
-            <br>
+        </li>
+        </a>
     {% endfor %}
+    </ul>
 
 {% endblock %}
