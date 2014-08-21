@@ -36,9 +36,6 @@ def about():
 def contact():
     return render_template("Contact.html")
 
-@app.route('/bootstrap')
-def bootstrap():
-    return render_template("Bootstrap.html")
 
 
 if __name__ == '__main__':

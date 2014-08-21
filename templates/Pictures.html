@@ -4,14 +4,20 @@
     Pictures
 {% endblock %}
 
+
 {% block content %}
+
     {% for picture in pictures %}
-        {{ picture.title }}
-        <br>
-        <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
-        <br>
-        {{ picture.description }}
-        <br>
-        <br>
+
+            {{ picture.title }}
+            <br>
+                <a href = {{ picture.url }}>
+                    <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
+                </a>
+            <br>
+            {{ picture.description }}
+            <br>
+            <br>
     {% endfor %}
+
 {% endblock %}

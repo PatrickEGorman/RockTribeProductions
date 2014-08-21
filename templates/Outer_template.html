@@ -3,13 +3,18 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel = "stylesheet" type = "text/css" href="theme.css">
+
+    {% block head %}
+    {% endblock %}
+
+
     <style>
 
     body{
+
         font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
-        margin-right: 200px;
-        margin-left: 200px;
+        margin-right: 100px;
+        margin-left: 100px;
         margin-bottom: 100px;
         background-image: url("http://iphonewallpapers-hd.com/walls/ubuntu_linux_background_the_open_source_alternative-other.jpg");
     }
@@ -19,8 +24,8 @@
     #cssmenu ul,
     #cssmenu li,
     #cssmenu a {
-         list-style: none;
-         margin: 0;
+        list-style: none;
+        margin: 0;
         padding: 0;
         border: 0;
         line-height: 1;
@@ -122,12 +127,25 @@
         box-shadow: inset 0 5px 10px #133e40;
     }
 
-    .content{
+    p.content{
+        border: 5px groove;
+        border-bottom-color: rgba(144, 238, 144, 0.19);
+        border-right-color: rgba(0, 255, 6, 0.14);
+        border-left-color: rgba(255, 255, 0, 0.14);
+        border-top-color: rgba(173, 216, 230, 0.19);
         background-color: rgba(104, 255, 219, 0.25);
+        margin:10px;
+        padding-top: 50px;
+        padding-right:150px;
+        padding-left: 150px;
+        padding-bottom:50px;
+        text-align: center;
     }
     </style>
 </head>
 <body>
+
+
 <div id="cssmenu">
 <ul>
   <li class = "button"><a href="home">Home</a></li>
@@ -137,8 +155,7 @@
   <li class = "button"><a href="contact">Contact</a></li>
 </ul>
 </div>
-<br>
-<p Class = content>
+<p class = content>
     {% block content %}
     {% endblock %}
 </p>
