@@ -1,0 +1,23 @@
+{% extends "Outer_template.html" %}
+
+
+
+{% block content %}
+    <h1>Sign In</h1>
+    <form action="" method="post" name="signin">
+    {{ form.hidden_tag() }}
+    <p>
+        Username:
+        {{form.username(size=15)}}<br>
+        {% for error in form.errors.username %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        Password:
+        {{ form.password(size=15, type = 'Password' )}}<br>
+        {% for error in form.errors.password %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p><input type="submit" value="Sign In"></p>
+</form>
+{% endblock %}

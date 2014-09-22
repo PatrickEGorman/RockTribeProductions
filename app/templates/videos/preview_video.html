@@ -1,0 +1,22 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+    {{ video.title }}
+{% endblock %}
+
+{% block content %}
+
+{% if video_add %}
+    <a href="add_video">
+        <button>Add Video</button>
+    </a>
+    <br>
+    <br>
+{% endif %}
+{% if video_remove %}
+    <a href="remove_video">
+        <button>Remove Video</button>
+    </a>
+    <br>
+    <br>
+{% endif %}

@@ -1,0 +1,20 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block content %}
+
+
+        {% for post in posts %}
+            {{ users[post.user_id].username }} posted:
+            <br>
+            {{ post.body }}
+            <br>
+            <br>
+            <br>
+        {% endfor %}
+
+
+{% endblock %}

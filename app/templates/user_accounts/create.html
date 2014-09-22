@@ -1,0 +1,31 @@
+{% extends "Outer_template.html" %}
+
+{% block content %}
+    <h1>Create Account</h1>
+    <form action="" method="post" name="create">
+    {{form.hidden_tag()}}
+    <p>
+        Username:
+            {% for error in form.errors.username %}
+                <span style="color: red;">[{{error}}]</span>
+            {% endfor %}<br>
+        {{form.username(size=15)}}<br>
+        Password:
+            {% for error in form.errors.password %}
+                <span style="color: red;">[{{error}}]</span>
+            {% endfor %}<br>
+        {{ form.password(size=15, type = 'password') }}<br>
+        Email:
+            {% for error in form.errors.username %}
+                <span style="color: red;">[{{error}}]</span>
+            {% endfor %}<br>
+        {{ form.email(size=30) }}<br>
+        Name:
+            {% for error in form.errors.username %}
+                <span style="color: red;">[{{error}}]</span>
+            {% endfor %}<br>
+        {{ form.name(size=30) }}<br>
+    </p>
+    <p><input type="submit" value="Create Account"></p>
+</form>
+{% endblock %}

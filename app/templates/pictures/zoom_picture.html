@@ -1,0 +1,45 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+
+    {{ picture.title }}
+
+{% endblock %}
+
+{% block head %}
+
+    <script>
+
+        window.back = function(){
+            history.back()
+        }
+
+    </script>
+
+{% endblock %}
+
+{% block content %}
+        Title: {{ picture.title }}
+        <br>
+        Description: {{ picture.description }}
+        <br>
+    {% if picture_add %}
+        <a href="add_picture">
+            <button>Add image</button>
+        </a>
+        <br>
+        <br>
+    {% endif %}
+
+    {% if picture_remove %}
+    <a href="remove_picture">
+            <button>Delete image</button>
+        </a>
+        <br>
+        <br>
+    {% endif %}
+    <img src={{ picture.url }} alt= {{ picture }} style ="width:100%;height:100%">
+
+            <button onclick = window.back()>Go Back</button>
+
+{% endblock %}

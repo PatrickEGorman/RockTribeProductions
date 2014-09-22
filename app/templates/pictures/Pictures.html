@@ -1,0 +1,53 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+    Pictures
+{% endblock %}
+
+{% block head %}
+
+    <style>
+        ul.pictures{
+            list-style-type: none;
+        }
+
+    </style>
+
+
+
+{% endblock %}
+
+
+{% block content %}
+    <script>
+    function expand(image){
+        var img = document.createElement("img");
+        img.src=image;
+        img.width=img.getAttribute("width");
+        img.height=img.getAttribute("height");
+        img.alt=image;
+        document.body.appendChild(img);
+    }
+
+    </script>
+    <ul class = pictures>
+    {% for picture in pictures %}
+        <a>
+        <li>
+            {{ picture.title }}
+            <br>
+            <a href={{ "/picture"~picture.id }}>
+                <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
+
+            </a>
+                    <br>
+                    {{ picture.description }}
+            <br>
+            <br>
+            <br>
+        </li>
+        </a>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
