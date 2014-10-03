@@ -1,0 +1,35 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+    Posts
+{% endblock %}
+
+{% block content %}
+
+    <form action="" method="post" name="add_post">
+    {{form.hidden_tag()}}
+    <p>
+        Post:<br>
+        {{form.body(size=250)}}
+        {% for error in form.errors.body %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+    <p><input type="submit" value="Create Post"></p>
+</form>
+        {% for post in posts|reverse %}
+            {% set id = post.user_id %}
+            {% for user in users %}
+                {% if user.id == id %}
+                    {{ user.username }} posted:
+                {% endif %}
+            {% endfor %}
+            <br>
+            {{ post.body }}
+            <br>
+            <br>
+            <br>
+        {% endfor %}
+
+
+{% endblock %}

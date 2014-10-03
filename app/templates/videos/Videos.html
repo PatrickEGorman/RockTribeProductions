@@ -1,0 +1,58 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+    Videos
+{% endblock %}
+
+{% block content %}
+    {% for video in videos %}
+        {% if video.user_id %}
+                <br>
+            {% for user in users %}
+                {% if user.id == video.user_id %}
+                    {{ user.username }} shared:
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% endif %}
+        {{ video.title }}
+        <br>
+        <iframe width="420" height="345"
+        src={{ video.url }}>
+        </iframe>
+        <br>
+        {{ video.description }}
+        <form method=post action={{"/post_commentv" }} >
+        <br>
+        Post Comment:<br>
+                {{form.body(size=250)}}
+
+                {{ form.id(hidden=true, value=video.id) }}
+
+                {% for error in form.errors.body %}
+                <span style="color: red;">[{{error}}]</span>
+                {% endfor %}<br>
+                <button type = submit>Post Comment</button>
+        </form>
+        <br>
+        <br>
+        {% for comment in video.comment[-3:] %}
+                {% set id = comment.user_id %}
+                {% for user in users %}
+                {% if user.id == id %}
+                    {{ user.username }} posted:
+                {% endif %}
+            {% endfor %}
+                <br>
+                {{ comment.body }}
+                <br>
+                <br>
+            {% endfor%}
+            <form action={{'video'~video.id}}>
+                <input type="submit" value="View all comments">
+            </form>
+        </ul>
+        <br>
+        <br>
+    {% endfor %}
+{% endblock %}
