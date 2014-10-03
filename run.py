@@ -1,4 +1,5 @@
 from app import app, views
+from app import config
 from app.users import views
 from app.users.admins import views
 from app.users.comments import views
