@@ -28,7 +28,6 @@ class Video(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     comment = db.relationship('VideoComment', backref='picture', lazy='dynamic')
 
-
     def __init__(self, title, url, description):
         self.title = title
         self.url = url
@@ -39,5 +38,9 @@ class Video(db.Model):
         return '<Video %s>' % self.title
 
 
-from app.users.comments.models import PictureComment, VideoComment
+class AdminPassword(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    password = db.Column(db.String)
+
+
 

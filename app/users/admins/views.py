@@ -2,9 +2,8 @@ from functools import wraps
 from flask import render_template, request, redirect, flash
 from flask.ext.login import current_user, login_required
 from app import app
-from app.config import SECRET_KEY
 from app.db import db
-from app.db.models import Picture, Video
+from app.db.models import Picture, Video, AdminPassword
 from app.users.admins import forms
 
 
@@ -13,7 +12,7 @@ from app.users.admins import forms
 def make_admin():
     form = forms.MakeAdmin()
     if form.validate_on_submit():
-        if form.password == SECRET_KEY:
+        if form.password == AdminPassword.query.all().first():
             current_user.role = 1
             db.session.commit()
             flash("Success "+current_user.username+" is now an admin!")

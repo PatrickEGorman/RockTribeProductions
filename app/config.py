@@ -9,7 +9,4 @@ except KeyError:
 basedir = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 CSRF_ENABLED = True
-SECRET_KEY = 'rocktribe'
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
-
-OPENID_PROVIDERS = [{"name": "test", "url": "test"}]
