@@ -19,30 +19,54 @@
 
 
 {% block content %}
-    <script>
-    function expand(image){
-        var img = document.createElement("img");
-        img.src=image;
-        img.width=img.getAttribute("width");
-        img.height=img.getAttribute("height");
-        img.alt=image;
-        document.body.appendChild(img);
-    }
-
-    </script>
     <ul class = pictures>
     {% for picture in pictures %}
         <a>
         <li>
+
+            {% if picture.user_id %}
+                <br>
+            {% for user in users %}
+                {% if user.id == picture.user_id %}
+                    {{ user.username }} shared:
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% endif %}
             {{ picture.title }}
             <br>
             <a href={{ "/picture"~picture.id }}>
-                <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%">
+                <img src= {{ picture.url }} alt=  {{ picture }} style ="width:50%;height:50%;list-style: none;">
 
             </a>
                     <br>
                     {{ picture.description }}
             <br>
+             <form method=post action={{"/post_commentp" }} >
+                {{form.body(size=250)}}
+
+                {{ form.id(hidden=true, value=picture.id) }}
+
+                {% for error in form.errors.body %}
+                <span style="color: red;">{{error}}</span>
+                {% endfor %}<br>
+                <button type="submit" value="Go">Post Comment</button>
+                <br>
+        </form>
+            {% if picture.comment[-3:] %}
+            {% for comment in picture.comment[-3:] %}
+                {% set id = comment.user_id %}
+                {% for user in users %}
+                {% if user.id == id %}
+                    {{ user.username }} posted:
+                {% endif %}
+            {% endfor %}
+                <br>
+                {{ comment.body }}
+                <br>
+                <br>
+            {% endfor%}
+            {% endif %}
             <br>
             <br>
         </li>

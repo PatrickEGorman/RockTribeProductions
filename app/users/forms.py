@@ -1,9 +1,6 @@
-from flask import g
-from flask.ext.login import session
 from flask.ext.wtf import Form
-from wtforms import StringField, validators, IntegerField
+from wtforms import StringField, validators, IntegerField, TextAreaField
 from wtforms.validators import DataRequired
-from app import app
 from app.users import models
 from app.db import db
 from werkzeug.security import check_password_hash
@@ -11,14 +8,18 @@ from werkzeug.security import check_password_hash
 
 class User(Form):
     username = StringField('username', validators=[DataRequired()])
-    password = StringField('password', validators=[DataRequired()])
+    password = StringField('password',
+                           validators=[DataRequired(),
+                                       validators.equal_to('confirm', message='Passwords must match')])
+    confirm = StringField('confirm')
     email = StringField('email')
     name = StringField('name')
 
 
 class LoginForm(Form):
     username = StringField('username', validators=[DataRequired()])
-    password = StringField('password', validators=[DataRequired()])
+    password = StringField('password',
+                           validators=[DataRequired()])
 
     def validate_login(self):
         user = self.get_user()
@@ -34,5 +35,5 @@ class LoginForm(Form):
 
 
 class Post(Form):
-    body = StringField('body')
+    body = TextAreaField('body', validators=[DataRequired()])
     user_id = IntegerField('user_id')

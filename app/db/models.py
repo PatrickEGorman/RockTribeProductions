@@ -1,4 +1,5 @@
 from app.db import db
+from flask.ext.login import current_user
 
 
 class Picture(db.Model):
@@ -6,11 +7,14 @@ class Picture(db.Model):
     url = db.Column(db.String, index=True, unique=True)
     description = db.Column(db.String)
     title = db.Column(db.String, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comment = db.relationship('PictureComment', backref='picture', lazy='dynamic')
 
     def __init__(self, title, url, description):
         self.title = title
         self.url = url
         self.description = description
+        self.user_id = current_user.id
 
     def __repr__(self):
         return '<Image %s>' % self.title
@@ -21,11 +25,19 @@ class Video(db.Model):
     url = db.Column(db.String, index=True, unique=True)
     description = db.Column(db.String, index=True)
     title = db.Column(db.String, unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comment = db.relationship('VideoComment', backref='picture', lazy='dynamic')
+
 
     def __init__(self, title, url, description):
         self.title = title
         self.url = url
         self.description = description
+        self.user_id = current_user.id
 
     def __repr__(self):
         return '<Video %s>' % self.title
+
+
+from app.users.comments.models import PictureComment, VideoComment
+

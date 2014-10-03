@@ -23,6 +23,14 @@
         <br>
         Description: {{ picture.description }}
         <br>
+        {% if picture.user_id %}
+            {% for user in users %}
+                {% if user.id == picture.user_id %}
+                    Shared by: {{ user.username }}
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% endif %}
     {% if picture_add %}
         <a href="add_picture">
             <button>Add image</button>
@@ -31,15 +39,39 @@
         <br>
     {% endif %}
 
+
     {% if picture_remove %}
     <a href="remove_picture">
             <button>Delete image</button>
         </a>
         <br>
-        <br>
     {% endif %}
-    <img src={{ picture.url }} alt= {{ picture }} style ="width:100%;height:100%">
+    <img src={{ picture.url }} alt= {{ picture }} style ="width:100%;height:100%"><br>
 
-            <button onclick = window.back()>Go Back</button>
+    <br>
+          <button onclick = window.back()>Go Back</button>
+    {% if not picture_remove and not picture_add %}
+
+    <form method=post action={{"/post_commentp" }} >
+                {% for error in form.errors.body %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}<br>
+                {{ form.id(hidden=true, value=picture.id) }}
+                    {{form.body(size=250)}}<br>
+                <button type="submit" value="Go">Post Comment</button>
+                <br>
+            </form>
+            {% for comment in comments %}
+                <br>
+                    {% set id = comment.user_id %}
+            {% for user in users %}
+                {% if user.id == id %}
+                    {{ user.username }} posted:
+                {% endif %}
+            {% endfor %}                <br>
+                    {{ comment.body }}
+                <br>
+            {% endfor %}
+    {% endif %}
 
 {% endblock %}

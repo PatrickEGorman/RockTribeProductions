@@ -1,0 +1,30 @@
+{% extends 'Outer_template.html' %}
+
+{% block head %}
+    Make Admin
+{% endblock %}
+
+{% block content %}
+
+    <form action="" method="post" name="admin">
+
+    {{ form.hidden_tag() }}
+
+        {% for error in form.errors.passcode %}
+            {{ error }}
+        {% endfor %}
+        <br>
+        Please enter site passcode:
+        <br>
+        <br>
+
+    {{ form.password(size = 20) }}
+
+    <br>
+    <br>
+
+    <input type="submit" value="Submit Password">
+
+    </form>
+
+{% endblock %}

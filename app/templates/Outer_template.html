@@ -148,7 +148,7 @@
     {% if messages %}
     <ul>
     {% for message in messages %}
-        <li>{{ message }} </li>
+        <li style = "list-style: none;">{{ message }} </li>
     {% endfor %}
     </ul>
     {% endif %}
@@ -171,6 +171,9 @@
 
     {% if g.user.is_authenticated() %}
         <li class = "button"><a href="logout">Logout</a></li>
+    {% endif %}
+    {% if g.user.role == 1 %}
+        <li class = "button"><a href="admin_menu">Admin Menu</a></li>
     {% endif %}
 
 </ul>

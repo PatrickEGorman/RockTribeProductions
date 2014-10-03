@@ -1,0 +1,30 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+    Admin Menu
+{% endblock %}
+
+{% block content %}
+    <form action="submit">
+        <input type="submit" value="Add picture">
+    </form>
+    <br>
+    <br>
+    <form action="remove_image">
+        <input type="submit" value="Delete Picture">
+    </form>
+    <br>
+    <br>
+    <form action="video_form">
+        <input type="submit" value="Add Video">
+    </form>
+    <br>
+    <br>
+    <form action="/remove_video">
+        <input type="submit" value="Delete Video">
+    </form>
+    <br>
+    <br>
+
+
+{% endblock %}

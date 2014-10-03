@@ -6,14 +6,14 @@ from app.db import db
 from app.users import models, forms, login_manager
 
 
+@login_manager.user_loader
+def load_user(userid):
+    return models.User.query.get(userid)
+
+
 @app.before_request
 def before_request():
     g.user = current_user
-
-
-@login_manager.user_loader
-def load_user(userid):
-    return models.User.query.filter_by(id=userid)
 
 
 @app.route('/create_account', methods=['GET', 'POST'])
@@ -41,9 +41,13 @@ def log_in():
     form = forms.LoginForm()
     if form.validate_on_submit():
         user = form.get_user()
-        login_user(user, remember=True)
-        flash("Logged in successfully.")
-        return redirect('/home')
+        try:
+            login_user(user, remember=True)
+            flash("Logged in successfully.")
+            return redirect('/home')
+        except AttributeError:
+            flash("Invalid username or password")
+            redirect('/login')
     return render_template('user_accounts/login.html', form=form)
 
 
@@ -60,24 +64,18 @@ except AttributeError:
     pass
 
 
-@app.route("/userposts")
+@app.route("/userposts", methods=["GET", "POST"])
 def users():
+    form = forms.Post()
     posts = models.Post.query.all()
-    users = models.User.query.all()
+    user_list = models.User.query.all()
     posts.sort(key=operator.attrgetter('timestamp'))
-    return render_template('user_accounts/posts.html', posts=posts, users=users)
-
-
-@app.route("/create_post")
-@login_required
-def create_post():
-    form = forms.Post
     if form.validate_on_submit():
-        post = models.Post(form.body.data, models.User.get_id(g.user.id))
+        post = models.Post(body=form.body.data, user_id=g.user.id)
         db.session.add(post)
         db.session.commit()
         return redirect('/userposts')
-    return render_template('useraccounts/create_post.html', form=form)
+    return render_template('user_accounts/posts.html', posts=posts, users=user_list, form=form)
 
 
 

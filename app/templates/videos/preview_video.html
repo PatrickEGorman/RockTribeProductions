@@ -6,6 +6,13 @@
 
 {% block content %}
 
+
+        <br>
+        <iframe width="420" height="345"
+        src={{ video.url }}>
+        </iframe>
+        <br>
+
 {% if video_add %}
     <a href="add_video">
         <button>Add Video</button>
@@ -14,9 +21,34 @@
     <br>
 {% endif %}
 {% if video_remove %}
-    <a href="remove_video">
-        <button>Remove Video</button>
-    </a>
+    <form method="POST" action="/delete_video" name="remove_video" >
+            {{ form.video_id(value=video.id, hidden=true) }}
+            <input type="submit" value="Remove Video">
+    </form>
     <br>
     <br>
 {% endif %}
+    {% if not video_remove and not video_add %}
+
+    <form method=post action={{"/post_commentv" }} >
+                {% for error in form.errors.body %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}<br>
+                {{ form.id(hidden=true, value=video.id) }}
+                    {{form.body(size=250)}}<br>
+                <button type="submit" value="Go">Post Comment</button>
+                <br>
+            </form>
+            {% for comment in comments %}
+                <br>
+            {% set id = comment.user_id %}
+            {% for user in users %}
+                {% if user.id == id %}
+                    {{ user.username }} posted:
+                {% endif %}
+            {% endfor %}                <br>
+                    {{ comment.body }}
+                <br>
+            {% endfor %}
+    {% endif %}
+{% endblock %}

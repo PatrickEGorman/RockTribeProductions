@@ -6,13 +6,14 @@ ROLE_ADMIN = 1
 
 
 class User(db.Model):
-    db.__tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
     password = db.Column(db.String(15))
     email = db.Column(db.String(120), unique=True)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    posts = db.relationship('Post', backref='user', lazy='dynamic')
+    pictures = db.relationship('Picture', backref='user', lazy='dynamic')
+    videos = db.relationship('Video', backref='user', lazy='dynamic')
 
     def __init__(self, username, password, email, name):
         self.username = username

@@ -1,0 +1,33 @@
+{% extends "Outer_template.html" %}
+
+{% block title %}
+    Videos
+{% endblock %}
+
+{% block content %}
+    {% for video in videos %}
+        {% if video.user_id %}
+                <br>
+            {% for user in users %}
+                {% if user.id == video.user_id %}
+                    {{ user.username }} shared:
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% endif %}
+        {{ video.title }}
+        <br>
+        <iframe width="420" height="345"
+        src={{ video.url }}>
+        </iframe>
+        <br>
+        {{ video.description }}
+        <form method=post name="remove_video" action="/remove_preview" >
+            <input type="submit" value="Remove Video">
+            {{ form.video_id(value=video.id, hidden=true) }}
+        </form>
+        <br>
+        <br>
+    {% endfor %}
+
+{% endblock %}
