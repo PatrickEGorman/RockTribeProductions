@@ -1,6 +1,5 @@
 from flask import render_template, g
 from app import app
-from app.db import models
 from flask.ext.login import current_user
 from users import login_manager
 from users.models import User
