@@ -8,7 +8,7 @@ from app.users import models, forms, login_manager
 
 @login_manager.user_loader
 def load_user(userid):
-    return models.User.query.get(userid)
+    return models.User.query.get(int(userid))
 
 
 @app.before_request
