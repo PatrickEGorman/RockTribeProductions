@@ -11,6 +11,7 @@ try:
 except KeyError:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://rocktribe:rocktribe@localhost:5432/rocktribe'
 
+app.secret_key = secret_key
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
