@@ -1,3 +1,4 @@
+from app.db import db
 from app import app, views
 from app import config
 from app.config import secret_key
