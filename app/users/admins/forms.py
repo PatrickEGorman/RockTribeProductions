@@ -14,4 +14,4 @@ class RemoveVideo(Form):
 
 
 class MakeAdmin(Form):
-    password = StringField('password', validators=[DataRequired])
+    password = StringField('password', validators=[DataRequired()])

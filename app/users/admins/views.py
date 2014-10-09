@@ -12,7 +12,7 @@ from app.users.admins import forms
 def make_admin():
     form = forms.MakeAdmin()
     if form.validate_on_submit():
-        if form.password == AdminPassword.query.all().first():
+        if form.password.data == "Rocktribe420":
             current_user.role = 1
             db.session.commit()
             flash("Success "+current_user.username+" is now an admin!")

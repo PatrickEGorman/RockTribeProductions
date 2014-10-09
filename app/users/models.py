@@ -1,5 +1,6 @@
 from app.db import db
 from datetime import datetime
+from app.db.models import Picture, Video
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
